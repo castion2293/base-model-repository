@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/castion2293/base-model-repository/compare/v0.0.2...v0.0.3) (2022-01-12)
+
+
+### Bug Fixes
+
+* 修改namespace([@nick](https://github.com/nick)) ([55f7d87](https://github.com/castion2293/base-model-repository/commit/55f7d87e1ad1119ef6f546895563cfede52cdb5b))
+
 ### [0.0.2](///compare/v0.0.1...v0.0.2) (2022-01-12)
 
 
