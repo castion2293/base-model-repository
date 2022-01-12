@@ -1,5 +1,8 @@
 <?php
 
+namespace Pharaoh\BaseModelRepository\Models;
+
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

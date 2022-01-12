@@ -1,5 +1,5 @@
 {
-    "name": "thoth-pharoh/base-model-repository",
+    "name": "thoth-pharaoh/base-model-repository",
     "description": "基礎抽象類別供專案使用",
     "type": "library",
     "license": "MIT",
