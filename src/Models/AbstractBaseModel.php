@@ -6,7 +6,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AbstractBaseModel extends Model
+abstract class AbstractBaseModel extends Model
 {
     use HasFactory;
 
