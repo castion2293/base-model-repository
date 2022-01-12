@@ -126,32 +126,17 @@ abstract class AbstractBaseRepository
      *
      * @param string $field
      * @param array $where
-     * @param array $extraParameters 額外條件
      * @param int $havingCount 取多少以上
-     * @return array
+     * @return mixed
      */
-    public function findDuplicateValue(string $field, array $where = [], array $extraParameters = [], int $havingCount = 1): array
+    public function findDuplicateValue(string $field, array $where = [], int $havingCount = 1)
     {
         return $this->model->selectRaw("{$field}, COUNT(*) AS {$field}_count")
-            ->when($where['start'] != '' && $where['end'] != '', function ($query) use ($where) {
-                return $query->whereBetween('created_at', [ $where['start'], $where['end'] ]);
-            })
-            ->when($extraParameters != [], function ($query) use ($extraParameters) {
-                foreach ($extraParameters as $key => $value) {
-                    $query = $query->where($key, $value);
-                }
-                return $query;
-            })
+            ->where($where)
             ->where($field, '<>', '')
             ->groupBy($field)
-            ->having("{$field}_count", '>', $havingCount)
-            ->get()
-            ->mapwithKeys(function ($fieldValue) use ($field) {
-                return [
-                    data_get($fieldValue, $field) => data_get($fieldValue, "{$field}_count")
-                ];
-            })
-            ->toArray();
+            ->having("{$field}_count", '>=', $havingCount)
+            ->get();
     }
 
     // ======================================================================================================
@@ -257,7 +242,6 @@ abstract class AbstractBaseRepository
         $table = $this->model->getTable();
         $sqlField = implode(' ,', $fields);
 
-        DB::statement(" ALTER TABLE `" . $table . "` AUTO_INCREMENT = 1");
         return DB::statement(
             "INSERT INTO `" . $table . "` (" . $sqlField . ") VALUES " . $sql . " ON DUPLICATE KEY UPDATE " . $duplicate . " ;"
         );
@@ -266,18 +250,19 @@ abstract class AbstractBaseRepository
     /**
      * 一次更新多筆數據
      *
-     * @param string $table [表名稱]
      * @param string $setField [欲更新的欄位名稱]
-     * @param string $caseField [各欄位的查詢依據]
-     * @param array $setValue [預設定的數值]
+     * @param string $caseField [查詢依據欄位名稱]
+     * @param array $setValue [愈設定的數值]
      */
-    public function updateMultiRows(string $table, string $setField, string $caseField, array $setValue)
+    public function updateMultiRows(string $setField, string $caseField, array $setValue)
     {
         $sql = '';
         foreach ($setValue as $key => $value) {
             $sql .= 'WHEN ' . $caseField . ' = ' . $key . ' THEN ' . $value . ' ';
         }
         $ids = implode(',', array_keys($setValue));
+
+        $table = $this->model->getTable();
 
         DB::statement(
             'UPDATE ' . $table .' SET ' . $setField . ' = (CASE ' . $sql .  'END) WHERE ' . $caseField . ' IN (' . $ids . ') '
@@ -287,26 +272,26 @@ abstract class AbstractBaseRepository
     /**
      * 增加數量
      *
-     * @param $id
+     * @param array $where
      * @param string $field
      * @param $num
      */
-    public function increment($id, string $field, $num)
+    public function increment(array $where, string $field, $num)
     {
-        $this->model->where('id', $id)
+        $this->model->where($where)
             ->increment($field, $num);
     }
 
     /**
      * 減少數量
      *
-     * @param $id
+     * @param array $where
      * @param string $field
      * @param $num
      */
-    public function decrement($id, string $field, $num)
+    public function decrement(array $where, string $field, $num)
     {
-        $this->model->where('id', $id)
+        $this->model->where($where)
             ->decrement($field, $num);
     }
 
