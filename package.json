@@ -15,5 +15,6 @@
     "hooks": {
       "pre-commit": "php-cs-fixer fix . && git add ."
     }
-  }
+  },
+  "version": "0.0.1"
 }
