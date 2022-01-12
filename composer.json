@@ -1,0 +1,21 @@
+{
+    "name": "thoth-pharoh/base-model-repository",
+    "description": "基礎抽象類別供專案使用",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick Zhang",
+            "email": "castion2293@yahoo.com.tw"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^8.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pharaoh\\BaseModelRepository\\": "src/"
+        }
+    }
+}
