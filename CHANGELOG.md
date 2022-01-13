@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/castion2293/base-model-repository/compare/v1.0.1...v1.0.2) (2022-01-13)
+
+
+### Bug Fixes
+
+* 完成ReadMe([@nick](https://github.com/nick)) ([0c904c0](https://github.com/castion2293/base-model-repository/commit/0c904c0fcc3755c96343a9ae7ae846dd180c167d))
+
 ### [1.0.1](https://github.com/castion2293/base-model-repository/compare/v1.0.0...v1.0.1) (2022-01-12)
 
 
