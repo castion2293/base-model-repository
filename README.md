@@ -384,7 +384,7 @@ class OrderScope extends AbstractBaseScope
 
 * 初始化 $extensions
 ```bash
-protected $extensions = [
+protected array $extensions = [
     'Date',
     ...
 ];
