@@ -355,22 +355,6 @@ $repository->deleteByWhere([
 
 ### 使用方法
 
-* 在 Repository 中需註冊 scope
-```bash
-$builder = $this->scopeQuery($scope, $params, $model)
-```
-| 參數 | 說明 | 類型 | 範例 | 預設 |
-| ------------|:----------------------- | :------| :------| :------|
-| $scope | scope名稱 | AbstractBaseScope | OrderScope | |
-| $params | 過濾條件 | array | ['no' => 123] | |
-| $model | 欲使用的model<br>(不給就使用原本$repository中的model) | array | ['no' => 123] | $repository中的model |
-
-完整範例
-```bash
-$builder = $this->scopeQuery(OrderScope::class, ['date' => '2022-01-10'])
-  ->select('*')
-```
-
 * scope class 需繼承 AbstractBaseScope
 ```bash
 namespace App\Scopes;
@@ -391,8 +375,10 @@ protected array $extensions = [
 ```
 
 * 實作過濾條件方法 (名稱為$extensions中，元素名稱前面 + 'add', ex: 'Date' => 'addDate')
-<br>使用 $builder->macro 去建立方法內容
+  <br>使用 $builder->macro 去建立方法內容
 ```bash
+use Illuminate\Database\Eloquent\Builder;
+
 /**
  * 篩選 交易時間
  *
@@ -407,6 +393,35 @@ protected function addDate(Builder $builder)
         return $builder->where('date', $date);
     });
 }
+```
+
+* 在 Model 中需加入該 global scope
+```bash
+use App\Scopes\OrderScope;
+
+/**
+ * The "booted" method of the model.
+ */
+protected static function booted()
+{
+    static::addGlobalScope(new OrderScope);
+}
+```
+
+* 在 Repository 中需註冊 scope
+```bash
+$builder = $this->scopeQuery($scope, $params, $model)
+```
+| 參數 | 說明 | 類型 | 範例 | 預設 |
+| ------------|:----------------------- | :------| :------| :------|
+| $scope | scope名稱 | AbstractBaseScope | OrderScope | |
+| $params | 過濾條件 | array | ['no' => 123] | |
+| $model | 欲使用的model<br>(不給就使用原本$repository中的model) | array | ['no' => 123] | $repository中的model |
+
+完整範例
+```bash
+$builder = $this->scopeQuery(OrderScope::class, ['date' => '2022-01-10'])
+  ->select('*')
 ```
 
 
