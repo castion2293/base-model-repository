@@ -20,5 +20,12 @@
         "psr-4": {
             "Pharaoh\\BaseModelRepository\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pharaoh\\BaseModelRepository\\BaseModelRepositoryProvider"
+            ]
+        }
     }
 }

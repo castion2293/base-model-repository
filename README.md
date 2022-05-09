@@ -431,5 +431,52 @@ $builder = $this->scopeQuery(OrderScope::class, ['date' => '2022-01-10'])
   ->select('*')
 ```
 
+## Helpers
+
+### 使用方法
+
+* `dd_sql` die and dump 整個 raw SQL 語句 
+  
+範例
+```bash
+dd_sql((User::select('id', 'name')->where('sex', 1)->orderBy('id'))
+```
+
+輸出結果
+```bash
+select 
+  `id`, 
+  `name` 
+from 
+  `users` 
+where 
+  `sex` = 1 
+order by 
+  `id` asc
+```
+
+* `dump_sql` dump 整個 raw SQL 語句 
+
+範例
+```bash
+dump_sql((User::select('id', 'name')->where('sex', 1)->orderBy('id'))
+```
+
+輸出結果
+```bash
+select 
+  `id`, 
+  `name` 
+from 
+  `users` 
+where 
+  `sex` = 1 
+order by 
+  `id` asc
+```
+
+
+
+
 
 
