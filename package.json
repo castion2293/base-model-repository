@@ -16,5 +16,5 @@
       "pre-commit": "php-cs-fixer fix . && git add ."
     }
   },
-  "version": "2.0.0"
+  "version": "2.0.1"
 }

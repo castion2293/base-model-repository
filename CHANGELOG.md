@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/castion2293/base-model-repository/compare/v2.0.0...v2.0.1) (2022-05-09)
+
+
+### Bug Fixes
+
+* 修改增加SqlHelper方法([@nick](https://github.com/nick)) ([05bfd7e](https://github.com/castion2293/base-model-repository/commit/05bfd7e08b5d2a9d3417f4ac6f8cc6787d0b51c8))
+
 ## [2.0.0](https://github.com/castion2293/base-model-repository/compare/v1.1.0...v2.0.0) (2022-02-16)
 
 ## [1.1.0](https://github.com/castion2293/base-model-repository/compare/v1.0.3...v1.1.0) (2022-02-16)
